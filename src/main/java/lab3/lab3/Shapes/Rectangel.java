@@ -2,16 +2,22 @@ package lab3.lab3.Shapes;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-public abstract class Rectangel {
+
+public class Rectangel extends Shape{
 
     private double width, height;
 
-    protected Rectangel(double width, double height) {
+    protected Rectangel(double x, double y, double width, double height, Color color) {
+        super(x, y, color);
         this.height = height;
         this.width = width;
     }
 
-    protected Rectangel() {this(0.0,0.0);}
+    protected Rectangel() {
+        super();
+        this.width = 0.0;
+        this.height = 0.0;
+    }
 
     public double getWidth() {return width;}
 
@@ -21,11 +27,38 @@ public abstract class Rectangel {
 
     public void setHeight(double newheight) {height = newheight;}
 
-    public abstract void paint(GraphicsContext gc);
+    @Override
+    public void move(long elapsedTimeNs){
+        super.move(elapsedTimeNs);
 
-    public void constrain(double height, double width /* add two more double*/) {
-
+        width += getDx() * elapsedTimeNs / BILLION;
+        height += getDy() * elapsedTimeNs / BILLION;
     }
+    @Override
+    public void paint(GraphicsContext gc) {
+
+        gc.fillRect(getX(), getY(), width, height);
+    }
+//    @Override
+//    public void constrain(double boxX, double boxY,
+//                          double boxWidth, double boxHeight){
+//        super.constrain(boxX, boxY, boxWidth, boxHeight);
+//        double dx = getDx();
+//        double dy = getDy();
+//
+//
+//        if (x2 < boxX) {
+//            setVelocity(Math.abs(dx), dy ) ;
+//        } else if (x2 > boxWidth) {
+//            setVelocity(-Math.abs(dx), dy );
+//        }
+//        if (y2 < boxY) {
+//            setVelocity(dx, Math.abs(dy) );
+//        } else if (y2 > boxHeight) {
+//            setVelocity(dx, -Math.abs(dy) );
+//        }
+//    }
+
 
     public String toString() {
         String info = "Re";
