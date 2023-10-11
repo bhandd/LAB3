@@ -5,11 +5,16 @@ import javafx.scene.paint.Color;
 
 abstract public class FillableShapes extends Shape{
 
-    private boolean filled = false;
+    private boolean filled;
 
     public FillableShapes(double x, double y, Color color, boolean filled) {
         super(x, y, color);
         this.filled = filled;
+    }
+
+    public FillableShapes () {
+        super();
+        this.filled = false;
     }
 
     public boolean isFilled() {
@@ -17,10 +22,6 @@ abstract public class FillableShapes extends Shape{
     }
 
     public void setFilled(boolean filled) {
-        if (filled) {
-
-        }
-        filled = true;
-
+        this.filled = filled;
     }
 }
