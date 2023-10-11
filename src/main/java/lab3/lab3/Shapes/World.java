@@ -1,5 +1,7 @@
 package lab3.lab3.Shapes; // TODO: Change to your package name
 
+import javafx.scene.paint.Color;
+
 /**
  * A representation of a world containing a set of moving shapes. NB! The worlds
  * y-axis points downward.
@@ -23,7 +25,11 @@ public class World {
         this.width = width;
         this.height = height;
 
-        shapes = new Shape[0]; // an array of references (change to non-zero size)
+        shapes = new Shape[2]; // an array of references (change to non-zero size)
+        shapes[0] = new Line(0,0,100,40, Color.RED);
+        shapes[0].setVelocity(40,40);
+        shapes[1] = new Rectangel(0,0,30,40,Color.BLACK);
+        shapes[1].setVelocity(50,50);
         // Create the actual Shape objects (sub types)
         // ....
     }

@@ -31,33 +31,34 @@ public class Rectangel extends Shape{
     public void move(long elapsedTimeNs){
         super.move(elapsedTimeNs);
 
-        width += getDx() * elapsedTimeNs / BILLION;
-        height += getDy() * elapsedTimeNs / BILLION;
+       // width += getDx() * elapsedTimeNs / BILLION;
+        //height += getDy() * elapsedTimeNs / BILLION;
     }
     @Override
     public void paint(GraphicsContext gc) {
-
+        gc.setFill(getColor());
         gc.fillRect(getX(), getY(), width, height);
     }
-//    @Override
-//    public void constrain(double boxX, double boxY,
-//                          double boxWidth, double boxHeight){
-//        super.constrain(boxX, boxY, boxWidth, boxHeight);
-//        double dx = getDx();
-//        double dy = getDy();
-//
-//
-//        if (x2 < boxX) {
-//            setVelocity(Math.abs(dx), dy ) ;
-//        } else if (x2 > boxWidth) {
-//            setVelocity(-Math.abs(dx), dy );
-//        }
-//        if (y2 < boxY) {
-//            setVelocity(dx, Math.abs(dy) );
-//        } else if (y2 > boxHeight) {
-//            setVelocity(dx, -Math.abs(dy) );
-//        }
-//    }
+    @Override
+    public void constrain(double boxX, double boxY,
+                          double boxWidth, double boxHeight){
+        super.constrain(boxX, boxY, boxWidth, boxHeight);
+        double dx = getDx();
+        double dy = getDy();
+        double x3 = width+getX();
+        double y3 = width+getY();
+
+        if (width < boxX) {
+           setVelocity(Math.abs(dx), dy ) ;
+        } else if (width > boxWidth) {
+            setVelocity(-Math.abs(dx), dy );
+        }
+        if (height < boxY) {
+            setVelocity(dx, Math.abs(dy) );
+        } else if (height > boxHeight) {
+            setVelocity(dx, -Math.abs(dy) );
+       }
+    }
 
 
     public String toString() {
