@@ -1,10 +1,14 @@
 package lab3.lab3.Shapes;
 
-abstract public class FillableShapes {
 
-    private boolean filled;
+import javafx.scene.paint.Color;
 
-    protected FillableShapes(boolean filled) {
+abstract public class FillableShapes extends Shape{
+
+    private boolean filled = false;
+
+    public FillableShapes(double x, double y, Color color, boolean filled) {
+        super(x, y, color);
         this.filled = filled;
     }
 
@@ -13,6 +17,10 @@ abstract public class FillableShapes {
     }
 
     public void setFilled(boolean filled) {
+        if (filled) {
+
+        }
+        filled = true;
 
     }
 }

@@ -3,12 +3,13 @@ package lab3.lab3.Shapes;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Rectangel extends Shape{
+
+public class Rectangel extends FillableShapes{
 
     private double width, height;
 
-    protected Rectangel(double x, double y, double width, double height, Color color) {
-        super(x, y, color);
+    protected Rectangel(double x, double y, double width, double height, Color color, boolean filled) {
+        super(x, y, color, filled);
         this.height = height;
         this.width = width;
     }
@@ -30,14 +31,18 @@ public class Rectangel extends Shape{
     @Override
     public void move(long elapsedTimeNs){
         super.move(elapsedTimeNs);
+        double x3 = getX()+width;
+        double y3 = getY()+height;
+        x3+= getDx() * elapsedTimeNs / BILLION;
+        y3 += getDy() * elapsedTimeNs / BILLION;
 
-       // width += getDx() * elapsedTimeNs / BILLION;
-        //height += getDy() * elapsedTimeNs / BILLION;
     }
     @Override
     public void paint(GraphicsContext gc) {
-        gc.setFill(getColor());
-        gc.fillRect(getX(), getY(), width, height);
+        if(FillableShapes.) {
+            gc.setFill(getColor());
+        }
+        gc.fillRect(getX(), getY(),width , height);
     }
     @Override
     public void constrain(double boxX, double boxY,
@@ -46,18 +51,18 @@ public class Rectangel extends Shape{
         double dx = getDx();
         double dy = getDy();
         double x3 = width+getX();
-        double y3 = width+getY();
+        double y3 = height+getY();
 
-        if (width < boxX) {
-           setVelocity(Math.abs(dx), dy ) ;
-        } else if (width > boxWidth) {
+        if (x3 < boxX) {
+            setVelocity(Math.abs(dx), dy ) ;
+        } else if (x3 > boxWidth) {
             setVelocity(-Math.abs(dx), dy );
         }
-        if (height < boxY) {
+        if (y3 < boxY) {
             setVelocity(dx, Math.abs(dy) );
-        } else if (height > boxHeight) {
+        } else if (y3 > boxHeight) {
             setVelocity(dx, -Math.abs(dy) );
-       }
+        }
     }
 
 
@@ -65,4 +70,3 @@ public class Rectangel extends Shape{
         String info = "Re";
         return info;
     }
-}
